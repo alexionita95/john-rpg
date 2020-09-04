@@ -1,0 +1,17 @@
+
+html
+    head
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+        script(src="/socket.io/socket.io.js")
+    body    
+        h1 Test
+        br
+        span#socketMessage
+        div#messages(style="width:500px; height:200px; border:1px solid black;overflow-y: scroll;")
+        form#sendMsg(action="")
+            input#textToSend(type="text")
+            br
+            input#sendBtn(type="submit", value="send")
+
+
+script(src="./js/main.js")
