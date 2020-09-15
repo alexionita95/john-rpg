@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    form#registerForm(action="")
+        input#registerUsername(type="text" name="username")
+        input#registerPassword(type="password" name="password")
+        input#registerEmail(type="email" name="email")
+        input#loginBtn(type="submit", value="Register")
+    script(src="/js/register.js")

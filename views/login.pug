@@ -1,0 +1,8 @@
+extends layout
+
+block content
+    form#loginForm(action="")
+        input#loginUsername(type="text" name="username")
+        input#loginPassword(type="password" name="password")
+        input#loginBtn(type="submit", value="Login")
+    script(src="/js/login.js")

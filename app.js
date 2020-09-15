@@ -1,17 +1,35 @@
+const bodyParser = require('body-parser')
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+const session = require('express-session');
+
+const usersRouter = require('./routes/users');
+
 
 app.use(express.static('public'));
 app.set('view engine', 'pug');
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
+app.use("/users",usersRouter);
+app.use(session({
+  secret:'john-rpg',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+      maxAge: 60 * 1000 * 30
+  }
+}));
 app.get('/', (req, res) => {
-  res.render('index');
+  var logged=req.session.user ? "Logged in": "Not connected";
+  res.render('index',{title:"Hello",loggedin:logged});
 });
 
 
 var clients = [];
+var players =[]; 
 
 io.on('connection', (socket) => {
   console.log('a user connected');
