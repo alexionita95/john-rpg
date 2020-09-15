@@ -54,7 +54,7 @@ User.prototype = {
         pool.query(sql, bind, function(err, result) {
             if(err)
             {
-                callback(null);
+                callback({error:true});
                 return;
             }
             // return the last inserted id. if there is no error

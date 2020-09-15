@@ -44,12 +44,17 @@ router.post('/register', (req, res, next) => {
     user.create(userInput, function(lastId) {
         // if the creation of the user goes well we should get an integer (id of the inserted user)
         if(lastId) {
+            if(lastId.error && lastId.error === true){
+                res.send({success:false, message:"DB is bullshit again..."});
+            }
+            else{
             // Get the user data by it's id. and store it in a session.
             user.find(lastId, function(result) {
                 req.session.user = result;
                 req.session.opp = 0;
                 res.send({success:true});
             });
+        }
 
         }else {
             res.send({success:false, message:"Error creating a new user ..."});
